@@ -3,7 +3,11 @@ const router = require('./router');
 const static = require('./static');
 const cookieParser = require('./cookieParser');
 const passport = require('./passport')
-const middlewares = [bodyParser,cookieParser,passport, router, static]
+const misc = require('./misc')
+const session = require('./session')
+
+
+const middlewares = [bodyParser, cookieParser,session,misc, passport, router, static]
 
 const applyMiddlewares = app => {
   middlewares.forEach(middleware => {
