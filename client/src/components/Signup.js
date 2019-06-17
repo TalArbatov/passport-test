@@ -12,7 +12,6 @@ const Signup = props => {
   }
 
   const onSubmit = () => {
-    console.log(getState);
     axios.post('/api/auth/local-signup', getState).then(res => {
       console.log(res.data)
     })

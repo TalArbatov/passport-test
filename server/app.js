@@ -14,6 +14,8 @@ mongoose.connect(config.mongoURI, {useNewUrlParser: true},(err) => {
 require('./models/UserSchema');
 
 require('./passport/local-signup');
+require('./passport/local-login')
+
 applyMiddlewares(app);
 
 //require passport modules
