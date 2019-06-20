@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TalArbatov/passport-test.git"
+    "url": "git+https://github.com/TalArbatov/first-socket-test.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TalArbatov/passport-test/issues"
+    "url": "https://github.com/TalArbatov/first-socket-test/issues"
   },
-  "homepage": "https://github.com/TalArbatov/passport-test#readme",
+  "homepage": "https://github.com/TalArbatov/first-socket-test#readme",
   "dependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
