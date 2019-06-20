@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import axios from 'axios'
 import Signup from './Signup';
-
+import MyComponent from './MyComponent';
 const App = props => {
   useEffect(() => {
     axios.get('/api/auth/test')
@@ -14,6 +14,7 @@ const App = props => {
     <div>
       <h1>App</h1>
       <Signup />
+      <MyComponent name='Tal'/>
     </div>
   )
 }

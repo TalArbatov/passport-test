@@ -15,6 +15,7 @@ require('./models/UserSchema');
 
 require('./passport/local-signup');
 require('./passport/local-login')
+require('./passport/jwt')
 
 applyMiddlewares(app);
 
