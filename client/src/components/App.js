@@ -1,22 +1,27 @@
-import React, {useEffect} from 'react';
-import axios from 'axios'
-import Signup from './Signup';
-import MyComponent from './MyComponent';
-const App = props => {
-  useEffect(() => {
-    axios.get('/api/auth/test')
-    .then(res => {
-      console.log(res.data)
-    })
-  })
+import React, { useEffect } from "react";
+import axios from "axios";
+import Signup from "./Signup";
+import Login from "./Login";
+import ProtectedButton from "./ProtectedButton";
+import utils from "../utils";
+import CheckAuth from './CheckAuth'
 
-  return(
-    <div>
-      <h1>App</h1>
-      <Signup />
-      <MyComponent name='Tal'/>
-    </div>
-  )
+class App extends React.Component {
+  componentDidMount() {
+    console.log(`TOKEN \n ${localStorage.token}`);
+    
+    if (localStorage.token) utils.setAuthorizationToken(localStorage.token);
+
+  }
+  render() {
+    return (
+      <div>
+        <CheckAuth></CheckAuth>
+        <Signup />
+        <Login />
+        <ProtectedButton />
+      </div>
+    );
+  }
 }
-
 export default App;

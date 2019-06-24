@@ -16,7 +16,7 @@ module.exports = {
     }],
   },
   node: {
-
+    fs: 'empty'
   },
   devServer: {
     hot: true,

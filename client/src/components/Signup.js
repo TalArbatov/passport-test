@@ -19,6 +19,7 @@ const Signup = props => {
 
   return(
     <div>
+      <h1>Signup:</h1>
       <label>email:</label>
       <input type='text' onChange={(e) => changeForm(e.target.value, 'email')}></input>
 

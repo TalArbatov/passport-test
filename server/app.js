@@ -4,6 +4,8 @@ const applyMiddlewares = require('./middlewares');
 const mongoose = require('mongoose');
 const passport =require('passport')
 const app = express();
+const https = require('https');
+const http = require('http')
 
 //setup mongodb connection via mongoose ORM
 mongoose.connect(config.mongoURI, {useNewUrlParser: true},(err) => {
@@ -12,6 +14,9 @@ mongoose.connect(config.mongoURI, {useNewUrlParser: true},(err) => {
 })
 
 require('./models/UserSchema');
+
+require('./passport/facebook-login')
+require('./passport/google-login')
 
 require('./passport/local-signup');
 require('./passport/local-login')
@@ -23,8 +28,10 @@ applyMiddlewares(app);
 
 const PORT = config.port;
 
-app.listen(PORT, () => {
+http.createServer(app).listen(PORT, () => {
   console.log(`Listening on port ${PORT}`)
 })
+
+//app.listen()
 
 
