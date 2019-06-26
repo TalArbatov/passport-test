@@ -7,10 +7,20 @@ import utils from "../utils";
 import CheckAuth from './CheckAuth'
 
 class App extends React.Component {
-  componentDidMount() {
+  componentWillMount() {
     console.log(`TOKEN \n ${localStorage.token}`);
-    
-    if (localStorage.token) utils.setAuthorizationToken(localStorage.token);
+    const token = localStorage.getItem('token');
+    if(token && token !== '') {
+      utils.setAuthorizationToken(localStorage.token);
+      //get new token from server
+      axios.get('/api/auth/me/from/token').then(res => {
+        console.log(res.data);
+
+        //set new token
+        utils.setAuthorizationToken(res.data.token)
+      })
+    }
+    //if (localStorage.token) utils.setAuthorizationToken(localStorage.token);
 
   }
   render() {

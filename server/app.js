@@ -1,6 +1,5 @@
 const config = require('../config')
 const express = require('express');
-const applyMiddlewares = require('./middlewares');
 const mongoose = require('mongoose');
 const passport =require('passport')
 const app = express();
@@ -21,6 +20,9 @@ require('./passport/google-login')
 require('./passport/local-signup');
 require('./passport/local-login')
 require('./passport/jwt')
+
+
+const applyMiddlewares = require('./middlewares');
 
 applyMiddlewares(app);
 
