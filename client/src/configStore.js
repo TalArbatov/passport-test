@@ -1,7 +1,10 @@
 import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
+import createHistory from 'history/createBrowserHistory';
 
 import authReducer from "./reducers/authReducer";
+
+const history = createHistory();
 
 const configStore = () =>
   createStore(
@@ -14,4 +17,6 @@ const configStore = () =>
     )
   );
 
-export default configStore;
+
+
+export configStore;

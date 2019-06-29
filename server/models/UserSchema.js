@@ -4,6 +4,12 @@ const UserSchema = mongoose.Schema({
   username: {type: String},
   email: {type: String},
   password: {type: String},
+  subscriptions: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Hub'
+    }
+  ],
   facebook: {
     id: String,
     token: String,

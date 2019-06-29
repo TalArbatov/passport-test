@@ -13,6 +13,9 @@ mongoose.connect(config.mongoURI, {useNewUrlParser: true},(err) => {
 })
 
 require('./models/UserSchema');
+require('./models/HubSchema');
+require('./models/PostSchema');
+
 
 require('./passport/facebook-login')
 require('./passport/google-login')

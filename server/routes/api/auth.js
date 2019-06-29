@@ -2,11 +2,9 @@ const router = require("express").Router();
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const config = require("../../../config");
-const User = require('mongoose').model('User');
-
+const User = require("mongoose").model("User");
 
 const secret = config.JWTsecret;
-
 
 router.get("/test", (req, res, next) => {
   res.send("API response from Express server");
@@ -41,11 +39,11 @@ router.post(
 router.get("/local-login-success", (req, res) => {
   //passport handler attachtest req.user
   const user = {
-    _id: req.user._id,
+    _id: req.user._id
     //email: req.user.email
   };
   const secret = config.JWTsecret;
-  jwt.sign(user, secret, { expiresIn: 15 }, (err, token) => {
+  jwt.sign(user, secret, { expiresIn: config.JWTexp }, (err, token) => {
     if (err) res.status(501);
     else res.send(token);
   });
@@ -96,7 +94,7 @@ router.get("/facebook-token", (req, res) => {
         _id: user._id,
         email: user.email
       };
-      jwt.sign(newUser, secret, { expiresIn: 15 }, (err2, token) => {
+      jwt.sign(newUser, secret, { expiresIn: config.JWTexp }, (err2, token) => {
         if (err2) res.status(501);
         else res.send(token);
       });
@@ -119,7 +117,7 @@ router.get("/google-token", (req, res) => {
         email: user.email
       };
       const secret = config.JWTsecret;
-      jwt.sign(newUser, secret, { expiresIn: 15 }, (err2, token) => {
+      jwt.sign(newUser, secret, { expiresIn: config.JWTexp }, (err2, token) => {
         if (err2) res.status(501);
         else res.send(token);
       });
@@ -132,22 +130,23 @@ router.get("/me/from/token", (req, res, next) => {
   if (!tokenHeader) res.sendStatus(401);
 
   const token = tokenHeader.split(" ")[1];
-  jwt.verify(token, secret,(err, decoded) => {
-    if (err) res.sendStatus(401);
-    User.findById(decoded._id, (err, user) => {
-      if(err) res.sendStatus(401);
-      
-      const cleanUser = {
-        _id: user._id
-      }
-      //sends a new, refreshed token
-      jwt.sign(cleanUser, secret, { expiresIn: 15 }, (err, token) => {
+  jwt.verify(token, secret, (err, decoded) => {
+    if (err) {
+      res.sendStatus(401);
+    } else {
+      User.findById(decoded._id, (err, user) => {
         if (err) res.sendStatus(401);
-        else res.send({token, user});
+
+        const cleanUser = {
+          _id: user._id
+        };
+        //sends a new, refreshed token
+        jwt.sign(cleanUser, secret, { expiresIn: 60 * 30  }, (err, token) => {
+          if (err) res.sendStatus(401);
+          else res.send({ token, user });
+        });
       });
-    
-      
-    })
+    }
   });
 });
 
